@@ -55,10 +55,9 @@ def stream(filePath):
 def threadStream():
 	csvList = []
 	dirPath = Entry.get(dialogTextBox)
-	for dirn, dirnames, filenames in os.walk(dirPath):
-		for filename in filenames:
-			if filename.endswith('.csv'):
-				csvList.append(os.path.join(dirPath, filename))
+	for filename in os.listdir(dirPath):
+		if filename.endswith('.csv'):
+			csvList.append(os.path.join(dirPath, filename))
 	seeStream.set("Streaming data....")
 
 	for csvs in csvList:
@@ -104,8 +103,7 @@ containerFrame.grid(row=3)
 eventsFrame = Frame(containerFrame, relief=SUNKEN, padx=10, pady=10)
 eventsFrame.grid(row=3)
 events = StringVar()
-#eventsPerSecond = Entry(eventsFrame, width=4, textvariable=events, justify=CENTER)
-eventsPerSecond = Spinbox(eventsFrame, from_=0, to=1000, width=5)
+eventsPerSecond = Spinbox(eventsFrame, from_=1, to=1000, width=5)
 eventsPerSecond.grid(row=0)
 events.set(1)
 eventsPerSecLabel = Label(eventsFrame, text='Events Per')
